@@ -17,8 +17,9 @@ $userid = $_SESSION['id'];
     ?>
 </head>
 <body>
+
+<!-- menu -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Navbar</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -34,7 +35,7 @@ $userid = $_SESSION['id'];
         <a class="nav-link" href="mynotes">ADD NOTE</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">PROFILE</a>
+        <a class="nav-link" href="profile.php">PROFILE</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="logout.php">LOGOUT</a>
@@ -42,5 +43,44 @@ $userid = $_SESSION['id'];
     </ul>
   </div>
 </nav>
+<!-- menu eind -->
+<div class="container">
+ <div class="card">
+   <div class="card-head">
+     <h3>NOTES</h3>
+    </div>
+   
+  <table class="tableTasks">
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    
+                    <th>Bewerken</th>
+                </tr>
+                <?php
+                
+                         $stmttasks = $db_conn->prepare("SELECT * FROM story ");
+                         $stmttasks->execute();
+                           foreach($stmttasks as $rows){
+                            $ids = $rows['id'];
+                              echo "<tr><td>" . $rows['notes']. "</td>";
+                              echo "<td>" . $rows['location']. "</td>";
+                              echo "<td>" . $rows['content']. "</td>";
+                              echo "<td>" . $rows['tag']. "</td>";
+                            
+                           }
+                    ?>
+            </table>
+             
+            
+      </div>
+    <script src="/docs/5.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+ 
+
+
+
+
 </body>
 </html>
