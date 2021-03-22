@@ -1,23 +1,26 @@
 <?php
 require "db.conn.php";
+//ph = place holder 
+
+
 
 if  (isset ($_POST['form_login'])){  
-  $email = $_POST['form_email'];
-  $password = $_POST['form_password'];
-  $sql = "SELECT * FROM users WHERE email = :ph_email";
-  $statement = $db_conn->prepare($sql);
-  $statement->bindParam(":ph_email", $email);
-  $statement->execute();
-  $database_gegevens = $statement->fetch(PDO::FETCH_ASSOC);    
-if ($database_gegevens['password'] == $password){
-          echo 'Gebruiker mag inloggen!';
-          session_start();
-          $_SESSION['name'] = $database_gegevens['name'];
-          $_SESSION['email'] = $database_gegevens['email'];
-          $_SESSION['id'] = $database_gegevens['id'];
-          header("location: dashboard.php?id=$idname");
-      } 
-}
+    $email = $_POST['form_email'];
+    $password = $_POST['form_password'];
+    $sql = "SELECT * FROM users WHERE email = :ph_email";
+    $statement = $db_conn->prepare($sql);
+    $statement->bindParam(":ph_email", $email);
+    $statement->execute();
+    $database_gegevens = $statement->fetch(PDO::FETCH_ASSOC);    
+  if ($database_gegevens['password'] == $password){
+            echo 'Gebruiker mag inloggen!';
+            session_start();
+            $_SESSION['name'] = $database_gegevens['name'];
+            $_SESSION['email'] = $database_gegevens['email'];
+            $_SESSION['id'] = $database_gegevens['id'];
+            header("location: dashboard.php?id=$idname");
+        } 
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
