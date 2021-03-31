@@ -10,7 +10,8 @@ if (isset($_POST['form_post'])) {
     $user = $_POST['form_user'];
     $date = $_POST['form_date'];
     $number = count($tag);
-    $number = count($content); }
+    $number = count($content);
+
     $sql = "INSERT INTO note (user_id, title, content, tag) VALUES (:ph_user_id, :ph_title, :ph_content , :ph_tag)";
     $stmt = $db_conn->prepare($sql);
     $stmt->bindParam(":ph_user_id", $user);
