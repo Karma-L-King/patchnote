@@ -66,9 +66,9 @@ if (isset($_POST['form_post'])) {
 
       <label for="form_tag" class="visually-hidden">tag</label>
       <select type="tag" id="form_tag" class="form-control" name="form_tag" placeholder="tag" required autofocus>
-        <option style="color:#62e384" value="bugfix">bugfix</option>
-        <option style="color:#62d6e3" value="release">release</option>
-        <option style="color:#df62e3" value="update">update</option>
+        <option style="color:" value="bugfix">bugfix</option>
+        <option style="color:" value="release">release</option>
+        <option style="color:" value="update">update</option>
       </select>
 
 
