@@ -17,7 +17,7 @@ $userid = $_SESSION['id'];
   <link href="CSS/story.css" rel="stylesheet">
   <link href="CSS/note.css" rel="stylesheet">
   <link href="CSS/menu.css" rel="stylesheet">
-  <link href="SCSS/note.scss" rel="idkyet">
+  <link href="CSS/main.css" rel="stylesheet">
   <link href="/your-path-to-fontawesome/css/all.css" rel="stylesheet">
 </head>
 
@@ -73,7 +73,7 @@ $userid = $_SESSION['id'];
             echo "<h3>" . $rows['title'] . "</h3>";
             echo "<p>" . $rows['content'] . "</p>";
             echo "<div id='tag'><a>" . $rows['tag'] . "</a></div>";
-            echo  "<a href=" / "><button className='bn29'>Button</button></a>";
+            echo  "";
             echo "</div>";
           }
 

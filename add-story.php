@@ -4,9 +4,7 @@
 
 require "db.conn.php";
 session_start();
-error_reporting(0);
-$number = count($_POST['form_tag']);
-$number = count($_POST['form_content']);
+
 if (isset($_POST['form_post'])) {
   $title = $_POST['form_title'];
   $stitle = $_POST['form_storytitle'];
@@ -14,28 +12,37 @@ if (isset($_POST['form_post'])) {
   $tag = $_POST['form_tag'];
   $user = $_POST['form_user'];
   $date = $_POST['form_date'];
-  $story = $_POST['form_story'];
 
+  $sql = "INSERT INTO story (date, story_title) VALUES (:ph_date ,:ph_stitle )";
+  $stmt = $db_conn->prepare($sql);
+  $stmt->bindParam(":ph_date", $date);
+  $stmt->bindParam(":ph_stitle", $stitle);
+  $stmt->execute();
 
-  if ($number > 0) {
-    for ($i = 0; $i < $number; $i++) {
-      $sql = "INSERT INTO note (user_id, story_id , title, content, tag) VALUES (:ph_user_id, :ph_story_id,:ph_title, :ph_content , :ph_tag)";
-      $stmt = $db_conn->prepare($sql);
-      $stmt->bindParam(":ph_user_id", $user);
-      $stmt->bindParam(":ph_story_id", $story);
-      $stmt->bindParam(":ph_title", $title);
-      $stmt->bindParam(":ph_content", $content);
-      $stmt->bindParam(":ph_tag", $tag);
-      var_dump($stmt->execute());
+  $story = $db_conn->lastInsertId();
+
+  $notes = array();
+  if ($tag && is_array($tag) && $content && is_array($content) && count($tag) === count($content)) {
+    for ($i = 0; $i < count($tag); $i++) {
+      $notes[] = array(
+        'tag' => $tag[$i],
+        'content' => $content[$i],
+        'user_id' => $user,
+        'story_id' => $story
+      );
     }
   }
 
-  $sql = "INSERT INTO story (id ,date, story_title) VALUES (:ph_story_id,:ph_date ,:ph_stitle )";
-  $stmt = $db_conn->prepare($sql);
-  $stmt->bindParam(":ph_story_id", $story);
-  $stmt->bindParam(":ph_date", $date);
-  $stmt->bindParam(":ph_stitle", $stitle);
-  var_dump($stmt->execute());
+  foreach ($notes as $key => $note) {
+    $sql = "INSERT INTO note (user_id, story_id, content, tag) VALUES (:user_id, :story_id, :content, :tag)";
+    $stmt = $db_conn->prepare($sql);
+    $stmt->bindParam(":user_id", $note['user_id']);
+    $stmt->bindParam(":story_id", $note['story_id']);
+    $stmt->bindParam(":content", $note['content']);
+    $stmt->bindParam(":tag", $note['tag']);
+    $stmt->execute();
+  }
+
   header("location:dashboard.php");
 }
 
@@ -72,7 +79,6 @@ if (isset($_POST['form_post'])) {
     <div class="form-group">
       <form name="add_name" id="add_name" method="post" action="" class='form_main'>
         <div class="table-responsive">
-          <input type="hidden" name="form_story" value="">
           <input type="hidden" name="form_user" value="<?php echo $_SESSION['id']; ?>">
           <table class="table table-bordered" id="dynamic_field">
             <tr> <label for="form_storytitle" class="visually-hidden">Story Title</label>
@@ -86,9 +92,9 @@ if (isset($_POST['form_post'])) {
 
               <td><label for="form_tag" class="visually-hidden">tag</label>
                 <select type="tag" id="form_tag[]" class="form-control name_list" name="form_tag[]" placeholder="tag" required autofocus>
-                  <option value="bugfix">bugfix</option>
-                  <option value="release">release</option>
-                  <option value="update">update</option>
+                  <option style="background-color:#62e384" value="bugfix">bugfix</option>
+                  <option style="background-color:#62d6e3" value="release">release</option>
+                  <option style="background-color:#df62e3" value="update">update</option>
                 </select>
               </td>
 
@@ -114,7 +120,7 @@ if (isset($_POST['form_post'])) {
     var i = 1;
     $('#add').click(function() {
       i++;
-      $('#dynamic_field').append('<tr id="row' + i + '"><td> <label for="form_content" class="visually-hidden">text</label><textarea name="paragraph_text" type="text" id="form_content" class="form-control" name="form_content[]" placeholder="CONTENT" required autofocus></textarea></td><td><label for="form_tag" class="visually-hidden">tag</label><select type="tag" id="form_tag" class="form-control name_list" name="form_tag[]" placeholder="tag" required autofocus><option value="bugfix">bugfix</option><option value="release">release</option><option value="update">update</option></select></td><td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">X</button></td></tr>');
+      $('#dynamic_field').append('<tr id="row' + i + '"><td><label for="form_content[]" class="visually-hidden">text</label><textarea type="text" id="form_content[]" class="form-control" name="form_content[]" placeholder="CONTENT" required autofocus></textarea></td><td><label for="form_tag" class="visually-hidden">tag</label><select type="tag" id="form_tag[]" class="form-control name_list" name="form_tag[]" placeholder="tag" required autofocus><option style="background-color:#62e384" value="bugfix">bugfix</option><option style="background-color:#62d6e3" value="release">release</option><option style="background-color:#df62e3" value="update">update</option></select></td><td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">X</button></td></tr>');
     });
     // remove button
     $(document).on('click', '.btn_remove', function() {
