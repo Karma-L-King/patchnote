@@ -1,8 +1,35 @@
 #border {
-    border-style: solid;
+
     background-color: lightblue;
+    display: block;
 }
 
-#tag {
-    border-style: solid;
+#tag {}
+
+html,
+body {
+    width: auto;
+    min-width: 1000px;
+    height: auto;
+}
+
+#sheet {
+    height: auto;
+    width: auto;
+
+}
+
+#cup {
+    display: block;
+}
+
+#stories {
+    padding-bottom: 50px;
+
+}
+
+#personalia {
+    align-items: center;
+    margin: 100px;
+    padding-top: 100px;
 }

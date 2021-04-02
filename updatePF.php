@@ -74,29 +74,23 @@ require "menu.php";
           echo "<input type='text' placeholder='LASTNAME' class='form-control' name='subject1' id='subject1' value='$achternaam'>";
           echo "<input type='text' placeholder='PASSWORD' class='form-control' name='subject2' id='subject2' value='$password'>";
           echo "<input type='text' placeholder='EMAIL' class='form-control' name='subject3' id='subject3' value='$emailpf'>";
-          echo '<button class="w-100 btn btn-lg btn-primary" name="form_update" type="submit">Update</button>';
+          echo "<button  class='w-100 btn btn-lg btn-primary' name='form_update' type='submit'>Update</button>";
           echo "</div>";
         }
 
+        if (isset($_POST['form_update'])) {
 
-        $voornaamv = ($_POST['subject']);
-        $achternaamv = ($_POST['subject1']);
-        $passwordv = ($_POST['subject2']);
-        $emailpfv = ($_POST['subject3']);
+          $voornaamv = ($_POST['subject']);
+          $achternaamv = ($_POST['subject1']);
+          $passwordv = ($_POST['subject2']);
+          $emailpfv = ($_POST['subject3']);
 
+          $stmt0 = $db_conn->prepare("UPDATE users SET firstname = '$voornaamv' , lastname = '$achternaamv', password = '$passwordv' , email = '$emailpfv' WHERE id = '$uid'");
+          $stmt0->execute();
 
-        header("location:dashboard.php");
-        $stmt0 = $db_conn->prepare("UPDATE users SET firstname = '$voornaamv' ,lastname = '$achternaamv',password = '$passwordv' , email = '$emailpfv' WHERE id = '$uid'");
-
-
-
-
-
-        $stmt0->execute();
-
-        //
-
-
+          echo "<script>window.location.href='dashboard.php';</script>";
+          exit;
+        }
 
         ?>
 
