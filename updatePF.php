@@ -15,7 +15,7 @@ require "menu.php";
   <meta name="description" content="">
   <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
   <meta name="generator" content="Hugo 0.79.0">
-  <!-- <link href="CSS/tasks.css" rel="stylesheet"> -->
+
   <title>PATCHNOTE</title>
   <link href="CSS/story.css" rel="stylesheet">
   <link href="CSS/note.css" rel="stylesheet">
