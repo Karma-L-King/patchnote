@@ -1,11 +1,7 @@
 <?php
-
-
-
 include "db.conn.php";
 session_start();
 require "menu.php";
-include "autokick.php";
 ?>
 
 <head>
@@ -22,8 +18,6 @@ include "autokick.php";
   <link href="CSS/main.css" rel="stylesheet">
   <link rel="dns-prefetch" href="//fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap" rel="stylesheet">
-
-
   <!-- Bootstrap core CSS -->
   <link href="/docs/5.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
@@ -34,10 +28,9 @@ include "autokick.php";
 
 <body>
 
-
   <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Dashboard</a>
+      <a class="navbar-brand" href="dashboard.php">Dashboard</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>

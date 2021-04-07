@@ -1,0 +1,87 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+
+
+    --light: #32a0a8;
+    --dark: #69BC22;
+    --text: white;
+    --delback: #a83238;
+    --delfront: black;
+}
+
+
+#edit {
+    display: block;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    background-color: var(--light);
+    width: 400px;
+    height: 70px;
+    border-radius: 30px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text);
+    background-size: 100% 100%;
+    box-shadow: 0 0 0 7px var(--light) inset;
+    margin-bottom: 15px;
+}
+
+#edit:hover {
+    background-image: linear-gradient(145deg,
+            transparent 10%,
+            var(--dark) 10% 20%,
+            transparent 20% 30%,
+            var(--dark) 30% 40%,
+            transparent 40% 50%,
+            var(--dark) 50% 60%,
+            transparent 60% 70%,
+            var(--dark) 70% 80%,
+            transparent 80% 90%,
+            var(--dark) 90% 100%);
+    animation: background 3s linear infinite;
+}
+
+#buttontext {
+    color: white;
+}
+
+#notebox {
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+#delete {
+    display: block;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    background-color: var(--delfront);
+    width: 400px;
+    height: 70px;
+    border-radius: 30px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text);
+    background-size: 100% 100%;
+    box-shadow: 0 0 0 7px var(--delfront) inset;
+    margin-bottom: 15px;
+}
+
+#delete:hover {
+    background-image: linear-gradient(145deg,
+            transparent 10%,
+            var(--delback) 10% 20%,
+            transparent 20% 30%,
+            var(--delback) 30% 40%,
+            transparent 40% 50%,
+            var(--delback) 50% 60%,
+            transparent 60% 70%,
+            var(--delback) 70% 80%,
+            transparent 80% 90%,
+            var(--delback) 90% 100%);
+    animation: background 3s linear infinite;
+}

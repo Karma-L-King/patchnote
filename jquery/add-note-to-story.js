@@ -8,7 +8,4 @@ $('.add-more').click(function() {
     
   });
 
-  /// dupliceert 1>2>4>8 
-  ///doel per 1 
-  ///////
  
